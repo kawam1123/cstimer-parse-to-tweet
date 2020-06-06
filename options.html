@@ -2,22 +2,50 @@
 <html>
   <head>
     <style>
-      label {
-        display:block;
+      h2 {
+        border-bottom: 1px solid;
       };
-      #status {
-        color: green;
+      
+      #prefixDiv, #optionsDiv, #saveDiv{
+        padding-bottom: 1em;
+        margin-top: 1em;
+        margin-bottom: 1em;
       }
+
+      #optionsDiv label {
+        display: block;
+      };
+
+      .status {
+        color: green;
+        margin-top: 1em;
+        margin-bottom: 1em;
+      };
+
+      #prefixDiv input{
+        width: 100%;
+      };
+
     </style>
   </head>
   <body>
+    <h2>Tweet Message Prefix (optional)</h2>
+    <div id="prefixText">
+      <p>Input message prefix.</p>
+    </div>
+    <div id="prefixDiv">
+    </div>
+    <div id="prefix_status" class="status"></div>
+    <h2>Statistical Indicator</h2>
     <div>
       <p>Choose statistics options to be tweeted.</p>
     </div>
     <div id="optionsDiv">
     </div>
-    <div id="status"></div>
-    <input id="save" type="button" value="save">
+    <div id="indicator_status" class="status"></div>
+    <div id="saveDiv">
+      <input id="save" type="button" value="save">
+    </div>
     
   </body>
   <script src="jquery-3.5.1.min.js"></script>

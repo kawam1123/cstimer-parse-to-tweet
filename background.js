@@ -4,6 +4,7 @@ chrome.runtime.onInstalled.addListener(function() {
   //set default parsing options. This default is just based on my preference.
   chrome.storage.sync.set(
       {
+        'prefix': "今日の3x3x3",
         'single': true,
         'mo3'   : false, 
         'ao5'   : true, 
@@ -29,11 +30,9 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 chrome.pageAction.onClicked.addListener(function(tab){
-  console.log("hellow background.js. pageAction is clicked!");
+  console.log("pageAction is clicked!");
 
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    console.log("tab id = ", tabs[0].id);
-    console.log("tab title = ", tabs[0].title);
     chrome.tabs.sendMessage(tabs[0].id, {
       command : "getStats"
     },
@@ -53,7 +52,6 @@ chrome.pageAction.onClicked.addListener(function(tab){
     });
   });
 });
-
 
 function buildTweetURL(statsText){
   if (statsText !== undefined && statsText !== null) {

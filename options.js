@@ -4,6 +4,19 @@
 
 'use strict';
 
+//Draw prefix message
+function constructPrefix(){
+  let page = document.getElementById('prefixDiv');
+  let prefix = document.createElement('input');
+  prefix.setAttribute("id", "prefix_textbox");
+  prefix.setAttribute("type", "text");
+  prefix.setAttribute("name", "prefix_option");
+  prefix.setAttribute("value", "");
+  page.appendChild(prefix);
+  console.log("prefix box is generated.");
+}
+
+//Draw options
 let page = document.getElementById('optionsDiv');
 const kOptions = ['single', 'mo3', 'ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'ao200', 'ao1000'];
 function constructOptions(kOptions) {
@@ -12,6 +25,7 @@ function constructOptions(kOptions) {
     let label = document.createElement('label');
     
     label.setAttribute("for", checkbox_name);
+    label.setAttribute("style", "display:block;");
     page.appendChild(label);
     let checkbox = document.createElement('input');
     checkbox.setAttribute("id", checkbox_name);
@@ -22,10 +36,12 @@ function constructOptions(kOptions) {
     label.appendChild(checkbox);
     label.insertAdjacentHTML('beforeend',item);
   }
+  console.log("options box is generated.");
 }
 
-//construct checkbox for options
+//construct options input field
 constructOptions(kOptions);
+constructPrefix();
 
 // Saves options to chrome.storage
 function save_options() {
@@ -41,7 +57,13 @@ function save_options() {
     'ao1000': document.getElementById("ao1000_check").checked
   }, function() {
     // Update status to let user know options were saved.
-    var status = document.getElementById('status');
+    var status = document.getElementById('indicator_status');
+    status.textContent = 'Saved!';
+  });
+  chrome.storage.sync.set({
+    'prefix': document.getElementById("prefix_textbox")
+  }, function(){
+    var status = document.getElementById('prefix_status');
     status.textContent = 'Saved!';
   });
  }
@@ -60,8 +82,14 @@ function restore_options(){
   }, function(items){
     for (let item of kOptions) {
       document.getElementById(item + "_check").checked = items[item];
-      console.log("option restored:", items);
-    }    
+    };
+    console.log("option restored:", items);
+  });
+  chrome.storage.sync.get({
+    'prefix': '3x3x3 Practice on csTimer'
+  }, function(items){
+    document.getElementById("prefix_textbox").value = items.prefix;
+    console.log("prefix restored:", items.prefix);
   });
 }
 
