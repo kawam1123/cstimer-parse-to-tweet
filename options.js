@@ -58,13 +58,13 @@ function save_options() {
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('indicator_status');
-    status.textContent = 'Saved!';
+    status.textContent = 'Options Saved!';
   });
   chrome.storage.sync.set({
-    'prefix': document.getElementById("prefix_textbox")
+    'prefix': document.getElementById("prefix_textbox").value
   }, function(){
     var status = document.getElementById('prefix_status');
-    status.textContent = 'Saved!';
+    status.textContent = 'Prefix Saved!';
   });
  }
 
