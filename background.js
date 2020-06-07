@@ -56,9 +56,7 @@ chrome.pageAction.onClicked.addListener(function(tab){
 function buildTweetURL(statsText){
   if (statsText !== undefined && statsText !== null) {
     var baseUrl = "http://twitter.com/intent/tweet";
-    var prefix = "";
-    var output = prefix + statsText; 
-    return baseUrl + "?text=" + encodeURIComponent(output);
+    return baseUrl + "?text=" + encodeURIComponent(statsText);
   }
   return undefined;
 }
