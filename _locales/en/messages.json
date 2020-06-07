@@ -1,4 +1,6 @@
 {
+    "ext_name": {"message": "csTimer Parse to Tweet"},
+    "ext_desc": {"message": "Parse csTimer statistics data (e.g, single, ao5, ao12, ao100 etc.) and tweet."},
     "msg_message_header": {"message": "Twitter Message Prefix (optional)"},
     "msg_prefix_text": {"message": "Input message prefix:"},
 

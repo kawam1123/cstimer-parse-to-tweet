@@ -8,8 +8,7 @@ This is Google Chrome extension for parsing csTimer statistics data and tweeting
 This extension automatically generates a text string like below:
 
 ```
-3x3x3 practice today!
-
+Today's 3x3x3 practice:
 1/5/12/50/100 = 15.80/20.40/21.92/22.30/23.62
 ```
 
