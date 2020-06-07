@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(function() {
   //set default parsing options. This default is just based on my preference.
   chrome.storage.sync.set(
       {
-        'prefix': "今日の3x3x3",
+        'prefix': chrome.i18n.getMessage('default_prefix'),
         'single': true,
         'mo3'   : false, 
         'ao5'   : true, 

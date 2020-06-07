@@ -4,6 +4,14 @@
 
 'use strict';
 
+//internationalize
+function constructMessage(){
+  document.getElementById('messageH2').innerHTML = chrome.i18n.getMessage('msg_message_header');
+  document.getElementById('prefixText').innerHTML = "<p>"+chrome.i18n.getMessage('msg_prefix_text')+"</p>";
+  document.getElementById('optionsH2').innerHTML = chrome.i18n.getMessage('msg_options_header');
+  document.getElementById('optionsText').innerHTML = "<p>"+chrome.i18n.getMessage('msg_options_text')+"</p>";
+}
+
 //Draw prefix message
 function constructPrefix(){
   let page = document.getElementById('prefixDiv');
@@ -40,6 +48,7 @@ function constructOptions(kOptions) {
 }
 
 //construct options input field
+constructMessage();
 constructOptions(kOptions);
 constructPrefix();
 
@@ -58,13 +67,13 @@ function save_options() {
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('indicator_status');
-    status.textContent = 'Options Saved!';
+    status.textContent = chrome.i18n.getMessage('msg_options_saved');
   });
   chrome.storage.sync.set({
     'prefix': document.getElementById("prefix_textbox").value
   }, function(){
     var status = document.getElementById('prefix_status');
-    status.textContent = 'Prefix Saved!';
+    status.textContent = chrome.i18n.getMessage('msg_prefix_saved');
   });
  }
 
@@ -86,7 +95,7 @@ function restore_options(){
     console.log("option restored:", items);
   });
   chrome.storage.sync.get({
-    'prefix': '3x3x3 Practice on csTimer'
+    'prefix': chrome.i18n.getMessage('default_prefix')
   }, function(items){
     document.getElementById("prefix_textbox").value = items.prefix;
     console.log("prefix restored:", items.prefix);

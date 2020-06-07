@@ -1,0 +1,14 @@
+{
+    "msg_message_header": {"message": "Twitter投稿メッセージ（オプション）"},
+    "msg_prefix_text": {"message": "メッセージを入力してください。"},
+
+    "msg_options_header": {"message": "統計指標"},
+    "msg_options_text": {"message": "取得する統計指標を選択してください。"},
+
+    "msg_prefix_saved": {"message": "メッセージを保存しました。"},
+    "msg_options_saved": {"message": "オプションを保存しました。"},
+
+    "default_prefix": {"message": "今日の3x3x3"}
+
+
+}

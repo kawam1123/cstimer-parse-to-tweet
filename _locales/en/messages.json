@@ -1,0 +1,12 @@
+{
+    "msg_message_header": {"message": "Twitter Message Prefix (optional)"},
+    "msg_prefix_text": {"message": "Input message prefix:"},
+
+    "msg_options_header": {"message": "Statistical Indicator"},
+    "msg_options_text": {"message": "Choose statistical indicator to be shown:"},
+
+    "msg_prefix_saved": {"message": "Message saved."},
+    "msg_options_saved": {"message": "Options saved."},
+
+    "default_prefix": {"message": "Today's 3x3x3 Practice:"}
+}
