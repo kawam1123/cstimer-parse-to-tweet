@@ -18,12 +18,13 @@ you can customize:
 
 **Enjoy csTimer!**
 
-## TODO
-- apply options from storage.sync.
-- get a scramble type of the target session and apply to the text.
-
 ## Disclaimers
-**This extension is under development. It might be defective.**
+- **This extension is under development. It might be defective.**
+
+
+## How to install?
+- Now it is under review on Chrome Web Store.
+- You can install this extension locally via developer mode at your own risk.
 
 ## Lisence
 under MIT Lisence.
@@ -48,7 +49,12 @@ under MIT Lisence.
 **csTimerをお楽しみください！**
 
 ## 免責事項
-**この拡張機能は開発中です。動作しない場合がありますので、ご留意ください。**
+- **この拡張機能は開発中です。動作しない場合がありますので、ご留意ください。**
+
+
+## インストール方法
+- Chrome Web Storeへの登録申請を行い、審査中です…。
+- デベロッパーモードでインストールして試すこともできます。個人の責任でどうぞ。人柱募集中。
 
 ## ライセンス
 MIT Lisence.
