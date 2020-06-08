@@ -1,14 +1,23 @@
 {
-    "ext_name": {"message": "csTimer Parse to Tweet"},
+    "ext_name": {"message": "csTimer Parse to Tweet dev"},
     "ext_desc": {"message": "csTimerの統計情報をパースしてTwitterに投稿します。オプションで統計指標を指定できます。"},
     "msg_message_header": {"message": "Twitter投稿メッセージ（オプション）"},
-    "msg_prefix_text": {"message": "メッセージを入力してください。"},
+    "msg_prefix_text": {"message": "Twitter投稿時に表示されるメッセージを入力してください。"},
+    "msg_prefix_label": {"message": "メッセージ"},
 
     "msg_options_header": {"message": "統計指標"},
     "msg_options_text": {"message": "取得する統計指標を選択してください。"},
 
+    "msg_format_header": {"message": "表示形式"},
+    "msg_format_text": {"message": "統計指標の表示形式を選択してください。"},
+
+    "msg_sampleoutput_header": {"message": "出力サンプル"},
+    
     "msg_prefix_saved": {"message": "メッセージを保存しました。"},
     "msg_options_saved": {"message": "オプションを保存しました。"},
+
+
+    "msg_format_options_custom": {"message": "カスタム"},
 
     "default_prefix": {"message": "今日の3x3x3"}
 

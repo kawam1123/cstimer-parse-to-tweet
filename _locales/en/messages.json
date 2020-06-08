@@ -2,13 +2,21 @@
     "ext_name": {"message": "csTimer Parse to Tweet"},
     "ext_desc": {"message": "Parse csTimer statistics data (e.g, single, ao5, ao12, ao100 etc.) and tweet."},
     "msg_message_header": {"message": "Twitter Message Prefix (optional)"},
-    "msg_prefix_text": {"message": "Input message prefix:"},
+    "msg_prefix_text": {"message": "Input message prefix for Twitter post:"},
+    "msg_prefix_label": {"message": "Message"},
 
     "msg_options_header": {"message": "Statistical Indicator"},
     "msg_options_text": {"message": "Choose statistical indicator to be shown:"},
 
+    "msg_format_header": {"message": "Display Format"},
+    "msg_format_text": {"message": "Choose display format for the statistical indicators:"},
+
+    "msg_sampleoutput_header": {"message": "Sample Output"},
+
     "msg_prefix_saved": {"message": "Message saved."},
     "msg_options_saved": {"message": "Options saved."},
+
+    "msg_format_options_custom": {"message": "Custom"},
 
     "default_prefix": {"message": "Today's 3x3x3 Practice:"}
 }

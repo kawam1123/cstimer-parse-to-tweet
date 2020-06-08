@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
       h2 {
         border-bottom: 1px solid;
@@ -11,10 +12,6 @@
         margin-top: 1em;
         margin-bottom: 1em;
       }
-
-      #optionsDiv label {
-        display: block;
-      };
 
       .status {
         color: green;
@@ -29,6 +26,7 @@
     </style>
   </head>
   <body>
+    <div class=container>
     <h2 id="messageH2">Tweet Message Prefix (optional)</h2>
     <div id="prefixText">
       <p>Input message prefix.</p>
@@ -44,10 +42,24 @@
     <div id="optionsDiv">
     </div>
     <div id="indicator_status" class="status"></div>
+
+    <h2 id="formatH2">Format</h2>
+    <div id="formatText"></div>
+    <div id="formatTextOptions">
+    </div>
+    <div id="customTextOptions">
+    </div>
+
+    <h2 id="sampleOutputH2"></h2>
+    <div id="sampleOutputText"></div>
+    <div id="sampleOutputBody"></div>
+
     <div id="saveDiv">
       <input id="save" type="button" value="save">
     </div>
+
     
+  </div>
   </body>
   <script src="jquery-3.5.1.min.js"></script>
   <script src="options.js"></script>
