@@ -4,7 +4,7 @@
 
 'use strict';
 
-//internationalize
+//Internationalize the messages
 function constructMessage(){
   document.getElementById('messageH2').innerHTML = chrome.i18n.getMessage('msg_message_header');
   document.getElementById('prefixText').innerHTML = "<p>"+chrome.i18n.getMessage('msg_prefix_text')+"</p>";
@@ -75,17 +75,17 @@ let formatOptionsPredefined = {
   "option1": {
     "display": "1/5/12/50/100",
     "name": "formatOption1_button",
-    "single": "1", "mo3": "3", "ao5": "5", "ao12": "12", "ao25": "25", "ao50": "50", "ao100": "100", "ao1000": "1000"
+    "single": "1", "mo3": "3", "ao5": "5", "ao12": "12", "ao25": "25", "ao50": "50", "ao100": "100", "ao200": "200", "ao1000": "1000"
   },
   "option2": {
     "display": "single/ao5/ao12/ao50/100",
     "name": "formatOption2_button",
-    "single": "single", "mo3": "3", "ao5": "ao5", "ao12": "ao12", "ao25": "ao25", "ao50": "ao50", "ao100": "ao100", "ao1000": "ao1000"
+    "single": "single", "mo3": "3", "ao5": "ao5", "ao12": "ao12", "ao25": "ao25", "ao50": "ao50", "ao100": "ao100", "ao200": "ao200", "ao1000": "ao1000"
   },
   "option3": {
     "display": "ao1/5/12/50/100",
     "name": "formatOption3_button",
-    "single": "ao1", "mo3": "3", "ao5": "5", "ao12": "12", "ao25": "25", "ao50": "50", "ao100": "100", "ao1000": "1000"
+    "single": "ao1", "mo3": "3", "ao5": "5", "ao12": "12", "ao25": "25", "ao50": "50", "ao100": "100", "ao200": "200", "ao1000": "1000"
   },
   "custom" : {
     "display": "custom",
@@ -196,11 +196,43 @@ function save_options() {
     }
   }
 
-  chrome.storage.sync.set({
-    'formatOption' : formatOptionValue
-  },function(){
-    console.log("formatOption saved:", formatOptionValue);
-  });
+  if(formatOptionValue=="custom"){
+    chrome.storage.sync.set({
+      'formatOption' : formatOptionValue,
+      'formatCustomOption' : {
+        '1':     document.getElementById("single_customFromat").value,
+        '3':     document.getElementById("mo3_customFromat").value,
+        '5':     document.getElementById("ao5_customFromat").value,
+        '12':    document.getElementById("ao12_customFromat").value,
+        '25':    document.getElementById("ao25_customFromat").value,
+        '50':    document.getElementById("ao50_customFromat").value,
+        '100':   document.getElementById("ao100_customFromat").value,
+        '200':   document.getElementById("ao200_customFromat").value,
+        '1000':  document.getElementById("ao1000_customFromat").value
+      }
+    },function(){
+      console.log("formatOption saved:", formatOptionValue);
+    });
+  }else{
+    chrome.storage.sync.set({
+      'formatOption' : formatOptionValue,
+      'formatCustomOption' : {
+        '1':     document.getElementById("single_customFromat").value = formatOptionsPredefined[formatOptionValue]["single"],
+        '3':     document.getElementById("mo3_customFromat").value = formatOptionsPredefined[formatOptionValue]["mo3"],
+        '5':     document.getElementById("ao5_customFromat").value = formatOptionsPredefined[formatOptionValue]["ao5"],
+        '12':    document.getElementById("ao12_customFromat").value = formatOptionsPredefined[formatOptionValue]["ao12"],
+        '25':    document.getElementById("ao25_customFromat").value = formatOptionsPredefined[formatOptionValue]["ao25"],
+        '50':    document.getElementById("ao50_customFromat").value = formatOptionsPredefined[formatOptionValue]["ao50"],
+        '100':   document.getElementById("ao100_customFromat").value = formatOptionsPredefined[formatOptionValue]["ao100"],
+        '200':   document.getElementById("ao200_customFromat").value = formatOptionsPredefined[formatOptionValue]["ao200"],
+        '1000':  document.getElementById("ao1000_customFromat").value = formatOptionsPredefined[formatOptionValue]["ao1000"]
+      }
+    },function(){
+      console.log("formatOption saved:", formatOptionValue);
+    });
+  }
+
+  showExample();
 
  }
 
@@ -229,7 +261,18 @@ function restore_options(){
   });
 
   chrome.storage.sync.get({
-    'formatOption': "option1"
+    'formatOption': "option1",
+    'formatCustomOption' : {
+      '1':     "1",
+      '3':     "3",
+      '5':     "5",
+      '12':    "12",
+      '25':    "12",
+      '50':    "50",
+      '100':   "100",
+      '200':   "200",
+      '1000':  "1000"
+    }
   }, function(items){
     const formatSelected = document.getElementsByName("format_option");
     formatSelected[0].checked = false;
@@ -247,11 +290,64 @@ function restore_options(){
         formatSelected[2].checked = true;
         break;
       case "custom":
-        formatSelected[4].checked = true;
+        formatSelected[3].checked = true;
       break;
+      default:
+        console.log("Exceeption: no format option");
     }
+    document.getElementById("single_customFromat").value  = items.formatCustomOption['1'];
+    document.getElementById("mo3_customFromat").value     = items.formatCustomOption['3'];
+    document.getElementById("ao5_customFromat").value     = items.formatCustomOption['5'];
+    document.getElementById("ao12_customFromat").value    = items.formatCustomOption['12'];
+    document.getElementById("ao25_customFromat").value    = items.formatCustomOption['25'];
+    document.getElementById("ao50_customFromat").value    = items.formatCustomOption['50'];
+    document.getElementById("ao100_customFromat").value   = items.formatCustomOption['100'];
+    document.getElementById("ao200_customFromat").value   = items.formatCustomOption['200'];
+    document.getElementById("ao1000_customFromat").value  = items.formatCustomOption['1000'];
+
+    showExample();
+
     console.log("format option restored:", items.formatOption);
   });
+}
+
+function showExample(){
+  let examplePrefix = document.getElementById("prefix_textbox").value;
+  let exampleFormat = [];
+  let exampleOutputTime = [];
+  const sampleTime = {
+    "single":"12.99",
+    "mo3": "14.52",
+    "ao5":"14.55", 
+    "ao12": "15.38",
+    "ao25": "16.20",
+    "ao50": "16.32",
+    "ao100":"16.63",
+    "ao200":"17.63",
+    "ao1000":"17.98",
+  };
+
+  for (let item of kOptions) {
+    if(document.getElementById(item + "_check").checked){
+      exampleFormat.push(document.getElementById(item+"_customFromat").value);
+      exampleOutputTime.push(sampleTime[item]);
+      //console.log("sampling ... :",document.getElementById(item+"_customFromat").value, sampleTime[item]);
+    }
+  };
+
+  let exampleBox = document.getElementById("sampleOutputBody");
+  exampleBox.innerHTML ="";
+  
+  console.log("examplePrefix:",examplePrefix);
+  console.log("exampleFormat:",exampleFormat.join("/"));
+  console.log("exampleOutputTime:",exampleOutputTime.join("/"));
+  let text = document.createElement('p')
+  text.innerHTML=examplePrefix;
+  let time = document.createElement('p')
+  time.innerHTML=exampleFormat.join('/') + " = " + exampleOutputTime.join('/');
+  exampleBox.appendChild(text);
+  exampleBox.appendChild(time);
+  //exampleBox.innerHTML =　"<p>" + examplePrefix + exampleFormat.join('/') + " = " + exampleOutputTime.join('/') + "</p>";
 }
 
 function checkCustomFormatInput(disp) {

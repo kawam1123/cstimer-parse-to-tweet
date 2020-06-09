@@ -5,6 +5,9 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
         console.log("restoring options...");
         var prefix_text = "";
         
+        console.log("selected session val:", $("#stats > div:first-child > select").val());
+        console.log("selected session:", $("#stats > div:first-child > select option:selected").text());
+
         (async () => {
             var prefixObj = await browser.storage.sync.get("prefix");
             prefix_text = prefixObj.prefix;
@@ -36,15 +39,26 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
                     console.log("now restoring option : ", item);
                 }
             }
-            console.log("restored options: ", indicators_array.join("/"));
+            console.log("restored options: ", indicators_array.join("/")); // e.g., "1/5/12/100"
             //indicator_text = indicators_text_array.join("/");
+        })()
+
+        //resoring format option...
+        var formatOptionText ="";
+        var customFormat = {};
+        (async () => {
+            var formatOptionObj = await browser.storage.sync.get(["formatOption", "formatCustomOption"]);
+            formatOptionText = formatOptionObj.formatOption;
+            customFormat = formatOptionObj.formatCustomOption;
+            console.log("restore format option : ", formatOptionText);
+            console.log("custom format option : ", formatOptionObj);
         })()
 
         console.log("restored complete!");
 
         //var text = "1/5/12/50/100 = ";
         
-        console.log("indicators text is set: ", indicator_text);
+        //console.log("indicators text is set: ", indicator_text);
 
         setTimeout(function(){
             $(function() {
@@ -62,16 +76,18 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
                             //console.log("th : ", statLabel);
 
                             //Convert "timer" to "single"
-                            if(statLabel=="time") statLabel = "single";
+                            if(statLabel=="time") statLabel = "single"; //single, mo3, ao5, ao12, etc.
 
                             //Check if statLabel matches the elements in the indicators array
                             if(indicators_array.some(label => label === statLabel)){
                                 if(statLabel == "single"){
                                     indicator = "1";
                                 } else {
-                                    indicator = statLabel.substr(2);
+                                    indicator = statLabel.substr(2); //3, 5, 12
                                 }
-                                indicators_text_array.push(indicator);
+
+                                //convert the indicators as display texts based on the format option.                                
+                                indicators_text_array.push(customFormat[indicator]);
                                 times_array.push(statObject.text());
                                 console.log("stat pushed:", statLabel);
                             }

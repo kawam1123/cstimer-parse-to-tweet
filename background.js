@@ -13,7 +13,19 @@ chrome.runtime.onInstalled.addListener(function() {
         'ao50'  : true,
         'ao100' : true,
         'ao200' : false,
-        'ao1000': false
+        'ao1000': false,
+        'formatOption': "option1",
+        'formatCustomOption' : {
+          '1':     "1",
+          '3':     "3",
+          '5':     "5",
+          '12':    "12",
+          '25':    "12",
+          '50':    "50",
+          '100':   "100",
+          '200':   "200",
+          '1000':  "1000"
+        }
       }, function() {
     console.log('Parsing options are set.');
   });
