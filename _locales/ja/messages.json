@@ -1,6 +1,6 @@
 {
-    "ext_name": {"message": "csTimer Parse to Tweet dev"},
-    "ext_desc": {"message": "csTimerの統計情報をパースしてTwitterに投稿します。オプションで統計指標を指定できます。"},
+    "ext_name": {"message": "csTimer Parse to Tweet"},
+    "ext_desc": {"message": "csTimerの統計情報をパースしてTwitterに投稿します。表示される統計指標はオプションで指定できます。"},
     "msg_message_header": {"message": "Twitter投稿メッセージ（オプション）"},
     "msg_prefix_text": {"message": "Twitter投稿時に表示されるメッセージを入力してください。"},
     "msg_prefix_label": {"message": "メッセージ"},
