@@ -78,7 +78,7 @@ let formatOptionsPredefined = {
     "single": "1", "mo3": "3", "ao5": "5", "ao12": "12", "ao25": "25", "ao50": "50", "ao100": "100", "ao200": "200", "ao1000": "1000"
   },
   "option2": {
-    "display": "single/ao5/ao12/ao50/100",
+    "display": "single/ao5/ao12/ao50/ao100",
     "name": "formatOption2_button",
     "single": "single", "mo3": "3", "ao5": "ao5", "ao12": "ao12", "ao25": "ao25", "ao50": "ao50", "ao100": "ao100", "ao200": "ao200", "ao1000": "ao1000"
   },
