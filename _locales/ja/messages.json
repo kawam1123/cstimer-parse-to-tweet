@@ -9,7 +9,7 @@
     "msg_options_text": {"message": "取得する統計指標を選択してください。"},
 
     "msg_format_header": {"message": "表示形式"},
-    "msg_format_text": {"message": "統計指標の表示形式を選択してください。"},
+    "msg_format_text": {"message": "統計指標の表示形式を選択してください。統計指標ごとにカスタムの入力形式も利用できます。"},
 
     "msg_sampleoutput_header": {"message": "出力サンプル"},
     

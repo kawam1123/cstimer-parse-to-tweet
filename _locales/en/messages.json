@@ -9,7 +9,7 @@
     "msg_options_text": {"message": "Choose statistical indicator to be shown:"},
 
     "msg_format_header": {"message": "Display Format"},
-    "msg_format_text": {"message": "Choose display format for the statistical indicators:"},
+    "msg_format_text": {"message": "Choose display format for the statistical indicators. You can use custom string for each indicator:"},
 
     "msg_sampleoutput_header": {"message": "Sample Output"},
 
