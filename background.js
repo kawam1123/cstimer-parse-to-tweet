@@ -25,7 +25,8 @@ chrome.runtime.onInstalled.addListener(function() {
           '100':   "100",
           '200':   "200",
           '1000':  "1000"
-        }
+        },
+        'clipboardOption' : "Twitter + Clipboard"
       }, function() {
     console.log('Parsing options are set.');
   });
@@ -55,15 +56,39 @@ chrome.pageAction.onClicked.addListener(function(tab){
       }
       console.log("response message:", msg);
       
-      var openURL = buildTweetURL(msg);    
-      console.log("openURL:", openURL);
-
-      if (openURL !== undefined){
-        chrome.tabs.create({ "url": openURL});
-      }
+      //var clipboardOption = "";
+      chrome.storage.sync.get({"clipboardOption": "Twitter + Clipboard"},function(item){
+        switch(item.clipboardOption){
+          case "Clipboard Only":
+            saveToClipboard(msg);
+            alert(chrome.i18n.getMessage('msg_clipboard_copied')+'\n\n'+msg);
+            console.log("output: clipboard");
+            break;
+          case "Twitter Only":
+            openTwitter(msg);
+            console.log("output: twitter");
+            break;
+          case "Twitter + Clipboard":
+            openTwitter(msg);
+            saveToClipboard(msg);
+            console.log("output: twitter and clipboard");
+            break;
+          default:
+            console.log("Exceeption: no clipboard option");
+        }
+      });
     });
   });
 });
+
+function openTwitter(msg){
+  var openURL = buildTweetURL(msg);    
+  console.log("openURL:", openURL);
+
+  if (openURL !== undefined){
+    chrome.tabs.create({ "url": openURL});
+  }
+}
 
 function buildTweetURL(statsText){
   if (statsText !== undefined && statsText !== null) {
@@ -71,4 +96,13 @@ function buildTweetURL(statsText){
     return baseUrl + "?text=" + encodeURIComponent(statsText);
   }
   return undefined;
+}
+
+function saveToClipboard(str) {
+  var textArea = document.createElement("textarea");
+  document.body.appendChild(textArea);
+  textArea.value = str;
+  textArea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textArea);
 }

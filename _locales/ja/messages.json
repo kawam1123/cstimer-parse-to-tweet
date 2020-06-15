@@ -11,6 +11,13 @@
     "msg_format_header": {"message": "表示形式"},
     "msg_format_text": {"message": "統計指標の表示形式を選択してください。統計指標ごとにカスタムの入力形式も利用できます。"},
 
+    "msg_clipboard_header": {"message": "クリップボードへの出力"},
+    "msg_clipboard_text": {"message": "Twitterへの投稿と同時にクリップボードに出力することもできます。出力オプションを選択してください。"},
+    "clipboard_twitter_only":{"message": "Twitterへの投稿のみ"},
+    "clipboard_twitter_clipboard":{"message": "Twitterへの投稿と同時にクリップボードへコピー"},
+    "clipboard_clipboard_only":{"message": "クリップボードへのコピーのみ"},
+    "msg_clipboard_copied":{"message": "クリップボードにタイムをコピーしました。"},
+
     "msg_sampleoutput_header": {"message": "出力サンプル"},
     
     "msg_prefix_saved": {"message": "メッセージを保存しました。"},

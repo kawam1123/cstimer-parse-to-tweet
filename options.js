@@ -13,6 +13,8 @@ function constructMessage(){
   document.getElementById('formatH2').innerHTML = chrome.i18n.getMessage('msg_format_header');
   document.getElementById('formatText').innerHTML = "<p>"+chrome.i18n.getMessage('msg_format_text')+"</p>";
   document.getElementById('sampleOutputH2').innerHTML = chrome.i18n.getMessage('msg_sampleoutput_header');
+  document.getElementById('clipboardH2').innerHTML = chrome.i18n.getMessage('msg_clipboard_header');
+  document.getElementById('clipboardText').innerHTML = "<p>"+chrome.i18n.getMessage('msg_clipboard_text')+"</p>";
 }
 
 //Draw prefix message
@@ -39,7 +41,6 @@ function constructPrefix(){
 }
 
 //Draw options
-
 const kOptions = ['single', 'mo3', 'ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'ao200', 'ao1000'];
 function constructOptions(kOptions) {
   let page = document.getElementById('optionsDiv');
@@ -147,9 +148,51 @@ function constructFormat(){
     div.appendChild(format);
 
   }
-  
-
   console.log("format options are generated.");
+}
+
+
+//Draw Clipboard option
+function constructClipboard(){
+  let page = document.getElementById('clipboardDiv');
+  let div = document.createElement('div');
+  let clipboardOptions ={
+    "Twitter + Clipboard": {
+      "name": "twitter_clipboard_check",
+      "display": chrome.i18n.getMessage('clipboard_twitter_clipboard')
+    },
+    "Twitter Only" : {
+      "name": "twitter_only_check",
+      "display": chrome.i18n.getMessage('clipboard_twitter_only')
+    },
+    "Clipboard Only": {
+      "name": "clipboard_only_check",
+      "display": chrome.i18n.getMessage('clipboard_clipboard_only')
+    }
+  }
+
+  for (let item in clipboardOptions) {
+    let div = document.createElement('div');
+    div.setAttribute("class","form-check");
+    page.appendChild(div);
+
+    let radiobutton_name = clipboardOptions[item]["name"];
+    
+    let format = document.createElement('input');
+    format.setAttribute("id", radiobutton_name);
+    format.setAttribute("type", "radio");
+    format.setAttribute("name", "clipboard_option");
+    format.setAttribute("value", item);
+    
+    div.appendChild(format);
+
+    let label = document.createElement('label');
+    label.setAttribute("for", radiobutton_name);
+    label.innerHTML = clipboardOptions[item]["display"];
+    div.appendChild(label);
+
+    //label.insertAdjacentHTML('beforeend',formatOptionsPredefined[item]["display"]);
+  }
 }
 
 //construct options input field
@@ -157,6 +200,7 @@ constructMessage();
 constructPrefix();
 constructOptions(kOptions);
 constructFormat();
+constructClipboard();
 
 // Saves options to chrome.storage
 function save_options() {
@@ -232,6 +276,23 @@ function save_options() {
     });
   }
 
+    //get clipboard option
+    let clipboardOptionValue = "";
+    const clipboardSelected = document.getElementsByName("clipboard_option");
+    for(let i = 0; i< clipboardSelected.length; i++){
+      console.log("check clipboardSelected[i].checked :",i,clipboardSelected[i].checked);
+      if(clipboardSelected[i].checked){
+        clipboardOptionValue = clipboardSelected[i].value;
+        break;
+      }
+    }
+    //save clipboard option
+    chrome.storage.sync.set({
+      'clipboardOption' : clipboardOptionValue
+    },function(){
+      console.log("clipboardOption saved:", clipboardOptionValue);
+    });
+
   showExample();
 
  }
@@ -267,12 +328,13 @@ function restore_options(){
       '3':     "3",
       '5':     "5",
       '12':    "12",
-      '25':    "12",
+      '25':    "25",
       '50':    "50",
       '100':   "100",
       '200':   "200",
       '1000':  "1000"
-    }
+    },
+    'clipboardOption' : "Twitter + Clipboard"
   }, function(items){
     const formatSelected = document.getElementsByName("format_option");
     formatSelected[0].checked = false;
@@ -305,9 +367,25 @@ function restore_options(){
     document.getElementById("ao200_customFromat").value   = items.formatCustomOption['200'];
     document.getElementById("ao1000_customFromat").value  = items.formatCustomOption['1000'];
 
+    const clipboardSelected = document.getElementsByName("clipboard_option");
+    switch(items.clipboardOption){
+      case "Twitter + Clipboard":
+        clipboardSelected[0].checked = true;
+        break;
+        case "Twitter Only":
+        clipboardSelected[1].checked = true;
+        break;
+      case "Clipboard Only":
+        clipboardSelected[2].checked = true;
+        break;
+      default:
+        console.log("Exceeption: no clipboard option");
+    }
+
     showExample();
 
     console.log("format option restored:", items.formatOption);
+    console.log("clipboard option restored:", items.clipboardOption);
   });
 }
 

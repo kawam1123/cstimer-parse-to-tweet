@@ -11,6 +11,13 @@
     "msg_format_header": {"message": "Display Format"},
     "msg_format_text": {"message": "Choose display format for the statistical indicators. You can use custom string for each indicator:"},
 
+    "msg_clipboard_header": {"message": "Copy to clipboard"},
+    "msg_clipboard_text": {"message": "Choose output option for copying to clipboard:"},
+    "clipboard_twitter_only":{"message": "Post on Twitter Only"},
+    "clipboard_twitter_clipboard":{"message": "Post on Twitter and Copy to Clipboard"},
+    "clipboard_clipboard_only":{"message": "Copy to Clipboard Only"},
+    "msg_clipboard_copied":{"message": "Successfully Copied your time to clipboard:"},
+
     "msg_sampleoutput_header": {"message": "Sample Output"},
 
     "msg_prefix_saved": {"message": "Message saved."},

@@ -35,6 +35,7 @@ you can customize:
 ### 1.0 beta (2020/06/08)
 - Published on Chrome Web Store.
 - Implemented the basic features.
+- Copy to the clipboard or not.
 
 ## Lisence
 under MIT Lisence.
@@ -57,6 +58,7 @@ under MIT Lisence.
 次の項目をカスタマイズできます。
 - 取得する統計指標
 - 統計指標の前に表示するテキスト(例・「今日の3x3x3」)
+- クリップボードへのコピーの有無
 
 ![](images/capture3.png)
 
@@ -70,11 +72,14 @@ under MIT Lisence.
 - デベロッパーモードでインストールして試すこともできます。個人の責任でどうぞ。人柱募集中。
 
 ## リリースノート
+### 1.2 beta (2020/06/16)
+- クリップボードへのコピー機能を追加しました。オプション画面からクリップボードへのコピーの有無を選択できます。また、Twitterへの投稿をせずにクリップボードへコピーだけすることもできます。
+- 誤字を修正しました
 ### 1.1 beta (2020/06/10)
 - 「1/5/12」などの表示形式を好みに合わせてカスタマイズすることができるようになりました。
 ### 1.0 beta (2020/06/08)
-- Chrome Web Store公開
-- 基本機能を実装
+- Chrome Web Storeに公開しました
+- 基本機能を実装しました
 
 ## ライセンス
 MIT Lisence.
