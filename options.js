@@ -15,6 +15,9 @@ function constructMessage(){
   document.getElementById('sampleOutputH2').innerHTML = chrome.i18n.getMessage('msg_sampleoutput_header');
   document.getElementById('clipboardH2').innerHTML = chrome.i18n.getMessage('msg_clipboard_header');
   document.getElementById('clipboardText').innerHTML = "<p>"+chrome.i18n.getMessage('msg_clipboard_text')+"</p>";
+  document.getElementById('sessionName').value = chrome.i18n.getMessage('msg_prefix_sessionname');
+  document.getElementById('scrambleType1').value = chrome.i18n.getMessage('msg_prefix_scramble1');
+  document.getElementById('scrambleType2').value = chrome.i18n.getMessage('msg_prefix_scramble2');
 }
 
 //Draw prefix message
@@ -432,6 +435,29 @@ function checkCustomFormatInput(disp) {
   document.getElementById('customTextOptions').style.display = "block";
 }
 
+function addPrefixVar(e){
+  console.log("add prefix var:",this.name);
+  var textarea = document.getElementById('prefix_textbox');
+
+  var sentence = textarea.value;
+  var len      = sentence.length;
+  var pos      = textarea.selectionStart;
+
+  var before   = sentence.substr(0, pos);
+  var word     = this.name;
+  var after    = sentence.substr(pos, len);
+
+  sentence = before + word + after;
+
+  textarea.value = sentence;
+
+  //e.currentTarget.removeEventListener('click',this);
+
+}
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
+document.getElementById('sessionName').addEventListener('click', {handleEvent: addPrefixVar, name: "%sessionName%"});
+document.getElementById('scrambleType1').addEventListener('click', {handleEvent: addPrefixVar, name: "%scrambleType1%"});
+document.getElementById('scrambleType2').addEventListener('click', {handleEvent: addPrefixVar, name: "%scrambleType2%"});
 //document.getElementById('formatCustom_button').addEventListener('click', checkCustomFormatInput);

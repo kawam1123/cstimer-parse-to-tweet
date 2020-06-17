@@ -5,15 +5,34 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
         console.log("restoring options...");
         var prefix_text = "";
         
-        console.log("selected session val:", $("#stats > div:first-child > select").val());
-        console.log("selected session:", $("#stats > div:first-child > select option:selected").text());
+        //get session name : #stats > div > select
+        sessionName = $("#stats > div:first-child > select option:selected").text();
+        
+        //console.log("selected session:", $("#stats > div:first-child > select option:selected").text());
+        
+        //get scramble type #scrambleDiv > div > nobr > select
+        scrambleType1 = $("#scrambleDiv > div:first-child > nobr > select:first option:selected").text();
+        scrambleType2 = $("#scrambleDiv > div:first-child > nobr > select:last option:selected").text();
+        //console.log("scramble type1:", $("#scrambleDiv > div:first-child > nobr > select:first option:selected").text());
+        //console.log("scramble type2:", $("#scrambleDiv > div:first-child > nobr > select:last  option:selected").text());
+        console.log("sessionName, scrambleType = ",sessionName, scrambleType1, scrambleType2);
 
         (async () => {
             var prefixObj = await browser.storage.sync.get("prefix");
             prefix_text = prefixObj.prefix;
             if(prefix_text) prefix_text = prefix_text + "\n";
             console.log("restore .prefix text : ", prefix_text);
+            prefix_text = prefix_text.replace(/%sessionName%/g,sessionName);
+            prefix_text = prefix_text.replace(/%scrambleType1%/g,scrambleType1);
+            prefix_text = prefix_text.replace(/%scrambleType2%/g,scrambleType2);
+            console.log("prefix_text is decompressed! : ", prefix_text);
         })()
+
+        //decompress variables in prefix_text
+        
+        
+
+        
 
         //restoring indicator option...
         var indicator_text = "";
